@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Statify</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="todo">TODO</string>
+    <string name="welcomeIntro">Made for you\n to ease your curiosity</string>
+    <string name="logoTodo">TODO</string>
+    <string name="welcomeDesc">Statify is designed to help you understand your\n listening patterns, create special
+        playlists\n and visualize your favorite tracks in a\n different way.
+    </string>
+    <string name="getStarted">Get Started</string>
+    <string name="welcomestrt">Get Started</string>
 </resources>
