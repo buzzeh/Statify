@@ -13,17 +13,11 @@ import com.spotify.protocol.types.Track
 //import com.sun.org.apache.xalan.internal.xsltc.compiler.Constants.REDIRECT_URI
 import android.R.attr.track
 
-
-
-
-
 class MainActivity : AppCompatActivity() {
 
     private val CLIENT_ID = "6b7c5a515e144ea2824276dedecdae17"
     private val REDIRECT_URI = "http://com.yourdomain.yourapp/callback"
     private var mSpotifyAppRemote: SpotifyAppRemote? = null
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,8 +54,6 @@ class MainActivity : AppCompatActivity() {
                     // Something went wrong when attempting to connect! Handle errors here
                 }
             })
-
-
     }
 
     private fun connected() {
