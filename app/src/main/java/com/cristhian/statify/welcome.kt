@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
+import android.widget.Toast
 import androidx.navigation.Navigation
 import com.tolkiana.spotifyplayer.SpotifyService
 
@@ -37,7 +38,11 @@ class welcome : Fragment() {
 
 
         (welcomeView.findViewById(R.id.my_rounded_sign_in_button) as Button).setOnClickListener {
-            SpotifyService.connect(this.context!!) {
+
+            SpotifyService.connect(this.context!!) {}
+
+            if (SpotifyService.getLogInStatus()) {
+                Navigation.findNavController(welcomeView).navigate(R.id.action_welcome_to_loginMain)
             }
         }
 

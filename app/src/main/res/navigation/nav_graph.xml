@@ -5,5 +5,18 @@
             app:startDestination="@id/welcome">
 
     <fragment android:id="@+id/welcome" android:name="com.cristhian.statify.welcome" android:label="fragment_welcome"
-              tools:layout="@layout/fragment_welcome"/>
+              tools:layout="@layout/fragment_welcome">
+        <action android:id="@+id/action_welcome_to_loginMain" app:destination="@id/loginMain"/>
+    </fragment>
+    <fragment android:id="@+id/loginMain" android:name="com.cristhian.statify.loginMain"
+              android:label="fragment_login_main" tools:layout="@layout/fragment_login_main">
+        <action android:id="@+id/action_loginMain_to_loginPlaylists" app:destination="@id/loginPlaylists"/>
+        <action android:id="@+id/action_loginMain_to_loginVisualizer" app:destination="@id/loginVisualizer"/>
+    </fragment>
+    <fragment android:id="@+id/loginPlaylists" android:name="com.cristhian.statify.loginPlaylists"
+              android:label="fragment_login_playlists" tools:layout="@layout/fragment_login_playlists">
+        <action android:id="@+id/action_loginPlaylists_to_loginVisualizer" app:destination="@id/loginVisualizer"/>
+    </fragment>
+    <fragment android:id="@+id/loginVisualizer" android:name="com.cristhian.statify.loginVisualizer"
+              android:label="fragment_login_visualizer" tools:layout="@layout/fragment_login_visualizer"/>
 </navigation>

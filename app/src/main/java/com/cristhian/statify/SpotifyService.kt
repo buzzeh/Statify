@@ -17,6 +17,7 @@ enum class PlayingState {
 object SpotifyService {
     private const val CLIENT_ID = "6b7c5a515e144ea2824276dedecdae17"
     private const val REDIRECT_URI = "com.cristhian.statify://callback"
+    var loggedIn = false
 
     private var mSpotifyAppRemote: SpotifyAppRemote? = null
     private var connectionParams: ConnectionParams = ConnectionParams.Builder(CLIENT_ID)
@@ -33,16 +34,22 @@ object SpotifyService {
 
         val connectionListener = object : Connector.ConnectionListener {
             override fun onConnected(spotifyAppRemote: SpotifyAppRemote) {
+                loggedIn = true
                 mSpotifyAppRemote = spotifyAppRemote
                 handler(true)
             }
 
             override fun onFailure(throwable: Throwable) {
-                Log.e("SpotifyService", throwable.message, throwable)
+                loggedIn = false
+                Log.e("SpotifyService --------------- FAIL", throwable.message, throwable)
                 handler(false)
             }
         }
         SpotifyAppRemote.connect(context, connectionParams, connectionListener)
+    }
+
+    fun getLogInStatus(): Boolean {
+        return loggedIn
     }
 
     fun disconnect() {
@@ -60,6 +67,11 @@ object SpotifyService {
     fun pause() {
         mSpotifyAppRemote?.playerApi?.pause()
     }
+
+    fun pause2() {
+        mSpotifyAppRemote?.userApi
+    }
+
 
     fun getCurrentTrack(handler: (track: Track) -> Unit) {
         mSpotifyAppRemote?.playerApi?.playerState?.setResultCallback { result ->
