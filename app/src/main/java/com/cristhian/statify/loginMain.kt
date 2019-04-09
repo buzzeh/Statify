@@ -38,7 +38,7 @@ class loginMain : Fragment() {
         userCall.enqueue(object: Callback<User> {
             override fun onResponse(userCall: Call<User>, response: Response<User>) {
                 var user = response.body()
-                view.findViewById<TextView>(R.id.userName).text = user?.display_name
+                view.findViewById<TextView>(R.id.userName).text = "Hello " + user?.display_name + ","
                 Toast.makeText(activity, response.body()?.birthdate, Toast.LENGTH_LONG).show()
 
             }
