@@ -19,6 +19,7 @@ object SpotifyService {
     private const val REDIRECT_URI = "com.cristhian.statify://callback"
     var loggedIn = false
 
+
     private var mSpotifyAppRemote: SpotifyAppRemote? = null
     private var connectionParams: ConnectionParams = ConnectionParams.Builder(CLIENT_ID)
         .setRedirectUri(REDIRECT_URI)
