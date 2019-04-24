@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/profile_nav"
+          android:title="Profile"
+          android:titleCondensed=""
+          android:icon="@drawable/profile_icon"
+          app:showAsAction="ifRoom"
+          android:actionLayout="@layout/fragment_profile"
+          android:menuCategory="container" />
     <item android:id="@+id/playlists_nav"
           android:title="Playlists"
           android:titleCondensed=""
@@ -13,13 +21,6 @@
           android:icon="@drawable/visualizer_icon"
           app:showAsAction="ifRoom"
           android:actionLayout="@layout/fragment_visualizer"
-          android:menuCategory="container" />
-    <item android:id="@+id/profile_nav"
-          android:title="Profile"
-          android:titleCondensed=""
-          android:icon="@drawable/profile_icon"
-          app:showAsAction="ifRoom"
-          android:actionLayout="@layout/fragment_profile"
           android:menuCategory="container" />
 
 

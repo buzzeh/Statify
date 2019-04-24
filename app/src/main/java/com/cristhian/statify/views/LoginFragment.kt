@@ -1,4 +1,4 @@
-package com.cristhian.statify
+package com.cristhian.statify.views
 
 
 import android.content.Intent
@@ -10,6 +10,7 @@ import android.widget.Button
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.cristhian.statify.R
 import com.spotify.sdk.android.authentication.AuthenticationClient
 import com.spotify.sdk.android.authentication.AuthenticationRequest
 import com.spotify.sdk.android.authentication.AuthenticationResponse
@@ -63,7 +64,7 @@ class LoginFragment : Fragment() {
                     // Handle successful response
                     token = response.accessToken
                     loggedIn = true
-                    Navigation.findNavController(view as View).navigate(R.id.action_welcome_to_loginMain, bundleOf("token" to token))
+                    Navigation.findNavController(view as View).navigate(R.id.action_login_to_profile, bundleOf("token" to token))
                 }
 
                 // Auth flow returned an error

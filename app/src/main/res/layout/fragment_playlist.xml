@@ -4,9 +4,10 @@
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
-                                                   tools:context=".views.VisualizerFragment"
+                                                   tools:context=".views.PlaylistFragment"
                                                    android:id="@+id/constraintLayout">
 
+    <!-- TODO: Update blank fragment layout -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
@@ -18,13 +19,12 @@
             app:menu="@menu/menu"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
-    <ImageView
-            android:layout_width="167dp"
-            android:layout_height="164dp" tools:src="@tools:sample/avatars[6]"
-            android:id="@+id/visualizer" app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="136dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="105dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="139dp" android:layout_marginBottom="371dp"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"/>
+    <TextView
+            android:text="playlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/playlist" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="107dp" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

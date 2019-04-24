@@ -4,19 +4,19 @@
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
             app:startDestination="@id/LoginFragment">
 
-    <fragment android:id="@+id/LoginFragment" android:name="com.cristhian.statify.LoginFragment" android:label="fragment_login"
+    <fragment android:id="@+id/LoginFragment" android:name="com.cristhian.statify.views.LoginFragment"
+              android:label="fragment_login"
               tools:layout="@layout/fragment_welcome">
-        <action android:id="@+id/action_welcome_to_loginMain" app:destination="@id/ProfileFragment"/>
+        <action android:id="@+id/action_login_to_profile" app:destination="@+id/ProfileFragment"/>
     </fragment>
-    <fragment android:id="@+id/ProfileFragment" android:name="com.cristhian.statify.ProfileFragment"
+    <fragment android:id="@+id/ProfileFragment" android:name="com.cristhian.statify.views.ProfileFragment"
               android:label="fragment_profile" tools:layout="@layout/fragment_profile">
-        <action android:id="@+id/action_loginMain_to_loginPlaylists" app:destination="@id/PlaylistsFragment"/>
-        <action android:id="@+id/action_loginMain_to_loginVisualizer" app:destination="@id/VisualizerFragment"/>
+        <action android:id="@+id/action_ProfileFragment_to_PlaylistFragment" app:destination="@id/PlaylistFragment"/>
+        <action android:id="@+id/action_ProfileFragment_to_VisualizerFragment"
+                app:destination="@id/VisualizerFragment"/>
     </fragment>
-    <fragment android:id="@+id/PlaylistsFragment" android:name="com.cristhian.statify.loginPlaylists"
-              android:label="fragment_playlists" tools:layout="@layout/fragment_playlists">
-        <action android:id="@+id/action_loginPlaylists_to_loginVisualizer" app:destination="@id/VisualizerFragment"/>
-    </fragment>
-    <fragment android:id="@+id/VisualizerFragment" android:name="com.cristhian.statify.loginVisualizer"
+    <fragment android:id="@+id/PlaylistFragment" android:name="com.cristhian.statify.views.PlaylistFragment"
+              android:label="fragment_playlist" tools:layout="@layout/fragment_playlist"/>
+    <fragment android:id="@+id/VisualizerFragment" android:name="com.cristhian.statify.views.VisualizerFragment"
               android:label="fragment_visualizer" tools:layout="@layout/fragment_visualizer"/>
 </navigation>

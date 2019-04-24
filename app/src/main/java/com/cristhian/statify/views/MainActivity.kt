@@ -1,17 +1,11 @@
-package com.cristhian.statify
+package com.cristhian.statify.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.spotify.android.appremote.api.ConnectionParams
-import com.spotify.android.appremote.api.Connector
-import com.spotify.android.appremote.api.SpotifyAppRemote
 
-import com.spotify.protocol.client.Subscription
-import com.spotify.protocol.types.PlayerState
-import com.spotify.protocol.types.Track
 //import com.sun.org.apache.xalan.internal.xsltc.compiler.Constants.REDIRECT_URI
-import android.R.attr.track
+import com.cristhian.statify.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,5 +17,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         setContentView(R.layout.activity_main)
+
+
     }
 }
