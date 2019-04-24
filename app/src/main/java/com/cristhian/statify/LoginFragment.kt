@@ -17,7 +17,7 @@ import com.spotify.sdk.android.authentication.LoginActivity.REQUEST_CODE
 
 
 
-class welcome : Fragment() {
+class LoginFragment : Fragment() {
 
     private lateinit var welcomeView: View
     private val CLIENT_ID = "6b7c5a515e144ea2824276dedecdae17"

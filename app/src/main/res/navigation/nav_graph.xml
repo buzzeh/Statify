@@ -2,23 +2,21 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
-            app:startDestination="@id/welcome">
+            app:startDestination="@id/LoginFragment">
 
-    <fragment android:id="@+id/welcome" android:name="com.cristhian.statify.welcome" android:label="fragment_welcome"
+    <fragment android:id="@+id/LoginFragment" android:name="com.cristhian.statify.LoginFragment" android:label="fragment_login"
               tools:layout="@layout/fragment_welcome">
-        <action android:id="@+id/action_welcome_to_loginMain" app:destination="@id/loginMain" app:popUpTo="@+id/welcome"
-                app:popUpToInclusive="true"
-        />
+        <action android:id="@+id/action_welcome_to_loginMain" app:destination="@id/ProfileFragment"/>
     </fragment>
-    <fragment android:id="@+id/loginMain" android:name="com.cristhian.statify.loginMain"
-              android:label="fragment_login_main" tools:layout="@layout/fragment_login_main">
-        <action android:id="@+id/action_loginMain_to_loginPlaylists" app:destination="@id/loginPlaylists"/>
-        <action android:id="@+id/action_loginMain_to_loginVisualizer" app:destination="@id/loginVisualizer"/>
+    <fragment android:id="@+id/ProfileFragment" android:name="com.cristhian.statify.ProfileFragment"
+              android:label="fragment_profile" tools:layout="@layout/fragment_profile">
+        <action android:id="@+id/action_loginMain_to_loginPlaylists" app:destination="@id/PlaylistsFragment"/>
+        <action android:id="@+id/action_loginMain_to_loginVisualizer" app:destination="@id/VisualizerFragment"/>
     </fragment>
-    <fragment android:id="@+id/loginPlaylists" android:name="com.cristhian.statify.loginPlaylists"
-              android:label="fragment_login_playlists" tools:layout="@layout/fragment_login_playlists">
-        <action android:id="@+id/action_loginPlaylists_to_loginVisualizer" app:destination="@id/loginVisualizer"/>
+    <fragment android:id="@+id/PlaylistsFragment" android:name="com.cristhian.statify.loginPlaylists"
+              android:label="fragment_playlists" tools:layout="@layout/fragment_playlists">
+        <action android:id="@+id/action_loginPlaylists_to_loginVisualizer" app:destination="@id/VisualizerFragment"/>
     </fragment>
-    <fragment android:id="@+id/loginVisualizer" android:name="com.cristhian.statify.loginVisualizer"
-              android:label="fragment_login_visualizer" tools:layout="@layout/fragment_login_visualizer"/>
+    <fragment android:id="@+id/VisualizerFragment" android:name="com.cristhian.statify.loginVisualizer"
+              android:label="fragment_visualizer" tools:layout="@layout/fragment_visualizer"/>
 </navigation>

@@ -1,12 +1,14 @@
 package com.cristhian.statify
 
 
+import com.cristhian.statify.objects.ArtistContainer
+import com.cristhian.statify.objects.SongContainer
+import com.cristhian.statify.objects.User
 import com.google.gson.GsonBuilder
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import retrofit2.http.GET
 import retrofit2.http.Header
 
@@ -37,4 +39,7 @@ interface  SpotifyClient {
 
     @GET("v1/me/top/artists")
     fun getTopArtists(@Header("Authorization") token:String): Call<ArtistContainer>
+
+    @GET("v1/me/top/tracks")
+    fun getTopTracks(@Header("Authorization") token:String): Call<SongContainer>
 }

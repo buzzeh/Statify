@@ -4,7 +4,7 @@
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
-                                                   tools:context=".welcome" android:id="@+id/constraintLayout"
+                                                   tools:context=".LoginFragment" android:id="@+id/constraintLayout"
                                                    android:background="@drawable/welcomebw">
     <ImageView
             android:src="@drawable/logomain"

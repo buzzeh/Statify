@@ -1,4 +1,4 @@
-package com.cristhian.statify
+package com.cristhian.statify.objects
 
 import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
