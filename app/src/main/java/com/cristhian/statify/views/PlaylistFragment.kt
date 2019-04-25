@@ -25,28 +25,27 @@ class PlaylistFragment : Fragment() {
 
         bottomNavigation= view.findViewById(R.id.bottom_navigation)
 
-//        bottomNavigation.setOnNavigationItemSelectedListener(object:
-//            BottomNavigationView.OnNavigationItemSelectedListener {
-//            override fun onNavigationItemSelected(item: MenuItem): Boolean {
-//                var response = false
-//                when (item.itemId) {
-//                    R.id.profile_nav -> {
-//                        Navigation.findNavController(view).navigate(R.id.action_PlaylistFragment_to_ProfileFragment)
-//                        response = true
-//                    }
-//                    R.id.playlists_nav -> {
-//
-//                        response = true
-//                    }
-//                    R.id.visualizer_nav -> {
-//                        Navigation.findNavController(view).navigate(R.id.action_PlaylistFragment_to_VisualizerFragment)
-//                        response = true
-//                    }
-//                }
-//                return response
-//
-//            }
-//        })
+        bottomNavigation.setOnNavigationItemSelectedListener(object :
+            BottomNavigationView.OnNavigationItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                var response = false
+                when (item.itemId) {
+                    R.id.profile_nav -> {
+                        //Navigation.findNavController(view).navigate(R.id.action_login_to_profile)
+                        response = true
+                    }
+                    R.id.playlists_nav -> {
+                        response = true
+                    }
+                    R.id.visualizer_nav -> {
+                        Navigation.findNavController(view).navigate(R.id.action_PlaylistFragment_to_VisualizerFragment2)
+                        response = true
+                    }
+                }
+                return response
+
+            }
+        })
 
         return view
     }

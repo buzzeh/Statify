@@ -21,31 +21,31 @@ class VisualizerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_playlist, container, false)
+        var view = inflater.inflate(R.layout.fragment_visualizer, container, false)
 
-//        bottomNavigation= view.findViewById(R.id.bottom_navigation)
-//
-//        bottomNavigation.setOnNavigationItemSelectedListener(object:
-//            BottomNavigationView.OnNavigationItemSelectedListener {
-//            override fun onNavigationItemSelected(item: MenuItem): Boolean {
-//                var response = false
-//                when (item.itemId) {
-//                    R.id.profile_nav -> {
-//                        Navigation.findNavController(view).navigate(R.id.action_VisualizerFragment_to_ProfileFragment)
-//                        response = true
-//                    }
-//                    R.id.playlists_nav -> {
-//                        Navigation.findNavController(view).navigate(R.id.action_VisualizerFragment_to_PlaylistFragment)
-//                        response = true
-//                    }
-//                    R.id.visualizer_nav -> {
-//                        response = true
-//                    }
-//                }
-//                return response
-//
-//            }
-//        })
+        bottomNavigation = view.findViewById(R.id.bottom_navigation)
+
+        bottomNavigation.setOnNavigationItemSelectedListener(object :
+            BottomNavigationView.OnNavigationItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                var response = false
+                when (item.itemId) {
+                    R.id.profile_nav -> {
+                        //Navigation.findNavController(view).navigate(R.id.action_VisualizerFragment_to_ProfileFragment)
+                        response = true
+                    }
+                    R.id.playlists_nav -> {
+                        Navigation.findNavController(view).navigate(R.id.action_VisualizerFragment_to_PlaylistFragment2)
+                        response = true
+                    }
+                    R.id.visualizer_nav -> {
+                        response = true
+                    }
+                }
+                return response
+
+            }
+        })
 
         return view
     }

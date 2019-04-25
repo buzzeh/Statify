@@ -7,7 +7,8 @@
     <fragment android:id="@+id/LoginFragment" android:name="com.cristhian.statify.views.LoginFragment"
               android:label="fragment_login"
               tools:layout="@layout/fragment_welcome">
-        <action android:id="@+id/action_login_to_profile" app:destination="@+id/ProfileFragment"/>
+        <action android:id="@+id/action_login_to_profile" app:destination="@+id/ProfileFragment"
+                app:popUpToInclusive="false" app:launchSingleTop="false"/>
     </fragment>
     <fragment android:id="@+id/ProfileFragment" android:name="com.cristhian.statify.views.ProfileFragment"
               android:label="fragment_profile" tools:layout="@layout/fragment_profile">
@@ -16,7 +17,13 @@
                 app:destination="@id/VisualizerFragment"/>
     </fragment>
     <fragment android:id="@+id/PlaylistFragment" android:name="com.cristhian.statify.views.PlaylistFragment"
-              android:label="fragment_playlist" tools:layout="@layout/fragment_playlist"/>
+              android:label="fragment_playlist" tools:layout="@layout/fragment_playlist">
+        <action android:id="@+id/action_PlaylistFragment_to_VisualizerFragment2"
+                app:destination="@id/VisualizerFragment"/>
+    </fragment>
     <fragment android:id="@+id/VisualizerFragment" android:name="com.cristhian.statify.views.VisualizerFragment"
-              android:label="fragment_visualizer" tools:layout="@layout/fragment_visualizer"/>
+              android:label="fragment_visualizer" tools:layout="@layout/fragment_visualizer">
+        <action android:id="@+id/action_VisualizerFragment_to_PlaylistFragment2"
+                app:destination="@id/PlaylistFragment"/>
+    </fragment>
 </navigation>
