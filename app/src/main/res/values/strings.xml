@@ -3,7 +3,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="todo">TODO</string>
     <string name="welcomeIntro">Made for you\n to appease your curiosity</string>
     <string name="logoTodo">TODO</string>
     <string name="welcomeDesc">Statify is designed to help you understand your\n listening patterns, create special
@@ -12,4 +11,8 @@
     <string name="getStarted">Get Started</string>
     <string name="welcomestrt">Get Started</string>
     <string name="base_url">https://api.spotify.com/</string>
+    <string name="welcome_username">Welcome @userName</string>
+    <string name="title"></string>
+    <string name="rating"></string>
+    <string name="todo">TODO</string>
 </resources>

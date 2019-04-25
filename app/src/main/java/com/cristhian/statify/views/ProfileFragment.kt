@@ -8,10 +8,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -54,8 +51,7 @@ class ProfileFragment : Fragment() {
         userCall.enqueue(object : Callback<User> {
             override fun onResponse(userCall: Call<User>, response: Response<User>) {
                 var user = response.body()
-                view.findViewById<TextView>(R.id.userName).text = user?.display_name
-
+                view.findViewById<TextView>(R.id.userName).text = "Welcome " + user?.display_name
             }
 
             override fun onFailure(userCall: Call<User>, t: Throwable) {
@@ -103,7 +99,7 @@ class ProfileFragment : Fragment() {
         bottomNavigation.setOnNavigationItemSelectedListener(object:
             BottomNavigationView.OnNavigationItemSelectedListener {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
-                var response = false;
+                var response = false
                 when (item.itemId) {
                     R.id.profile_nav -> {
 
@@ -167,9 +163,8 @@ class ProfileFragment : Fragment() {
         inner class ViewHolder(val view: View, private val activity: MainActivity) : RecyclerView.ViewHolder(view) {
             fun bindItems(song: Song?) {
                 val title: TextView = itemView.findViewById(R.id.title)
-
-
                 title.text = song?.name
+
 
                 itemView.setOnClickListener {
 
@@ -217,9 +212,8 @@ class ProfileFragment : Fragment() {
 
         inner class ViewHolder(val view: View, private val activity: MainActivity) : RecyclerView.ViewHolder(view) {
             fun bindItems(artist: Artist?) {
+
                 val title: TextView = itemView.findViewById(R.id.title)
-
-
                 title.text = artist?.name
 
                 itemView.setOnClickListener {
