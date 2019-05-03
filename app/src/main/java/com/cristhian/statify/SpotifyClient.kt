@@ -37,9 +37,10 @@ interface  SpotifyClient {
         }
     }
 
-    @GET("v1/me/top/artists?time_range=short_term&limit=5")
+    @GET("v1/me/top/artists?time_range=short_term&limit=4")
     fun getTopArtists(@Header("Authorization") token:String): Call<ArtistContainer>
 
     @GET("v1/me/top/tracks?time_range=short_term&limit=4")
     fun getTopTracks(@Header("Authorization") token:String): Call<SongContainer>
+
 }

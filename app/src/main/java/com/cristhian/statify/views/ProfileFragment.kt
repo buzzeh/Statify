@@ -33,7 +33,6 @@ class ProfileFragment : Fragment() {
     private var trackList: List<Song>? = null
     private var artistList: List<Artist>? = null
     private lateinit var bottomNavigation:BottomNavigationView
-    var trackNum = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +54,8 @@ class ProfileFragment : Fragment() {
             override fun onResponse(userCall: Call<User>, response: Response<User>) {
                 var user = response.body()
                 view.findViewById<TextView>(R.id.userName).text = "Welcome " + user?.display_name
+
+
             }
 
             override fun onFailure(userCall: Call<User>, t: Throwable) {
@@ -83,13 +84,12 @@ class ProfileFragment : Fragment() {
             override fun onResponse(call: Call<SongContainer>, response: Response<SongContainer>) {
                 var tracks: SongContainer? = response.body()
                 trackList = tracks?.items
-                trackList!![trackNum].artists[trackNum]
+                trackList!![0].artists[0]
                 trackRecycler = view.findViewById(R.id.trackRecycler)
                 trackRecycler.layoutManager = LinearLayoutManager(context)
                 trackAdapter = TrackAdapter(trackList, activity as MainActivity)
 
                 trackRecycler.adapter = trackAdapter
-                trackNum++
             }
 
             override fun onFailure(call: Call<SongContainer>, t: Throwable) {
@@ -129,11 +129,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, bundle: Bundle?) {
 
-
-
-
     }
-
 
 
 
@@ -163,7 +159,6 @@ class ProfileFragment : Fragment() {
 
         }
 
-
         inner class ViewHolder(val view: View, private val activity: MainActivity) : RecyclerView.ViewHolder(view) {
             fun bindItems(song: Song?) {
                 val title: TextView = itemView.findViewById(R.id.title)
@@ -182,7 +177,6 @@ class ProfileFragment : Fragment() {
                     //else
                 }
             }
-
         }
 
         // Return the size of your dataset (invoked by the layout manager)

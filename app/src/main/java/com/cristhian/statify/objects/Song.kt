@@ -8,7 +8,6 @@ data class Song (
     @PrimaryKey @ColumnInfo(name = "id") @Expose var id: String,
     @ColumnInfo(name = "name") @Expose var name: String,
     @ColumnInfo(name = "artists") @Expose var artists: List<Artist>,
-
-    @ColumnInfo(name = "uri") @Expose var album: Album
+    @ColumnInfo(name = "albums") @Expose var album: Album
 
 )
