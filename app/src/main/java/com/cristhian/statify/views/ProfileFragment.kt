@@ -33,6 +33,7 @@ class ProfileFragment : Fragment() {
     private var trackList: List<Song>? = null
     private var artistList: List<Artist>? = null
     private lateinit var bottomNavigation:BottomNavigationView
+    var trackNum = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +49,8 @@ class ProfileFragment : Fragment() {
         var userCall = SpotifyClient.create(base_url).getProfile(token as String)
         var artistCall = SpotifyClient.create(base_url).getTopArtists(token as String)
         var trackCall = SpotifyClient.create(base_url).getTopTracks(token as String)
+
+
         userCall.enqueue(object : Callback<User> {
             override fun onResponse(userCall: Call<User>, response: Response<User>) {
                 var user = response.body()
@@ -80,12 +83,13 @@ class ProfileFragment : Fragment() {
             override fun onResponse(call: Call<SongContainer>, response: Response<SongContainer>) {
                 var tracks: SongContainer? = response.body()
                 trackList = tracks?.items
+                trackList!![trackNum].artists[trackNum]
                 trackRecycler = view.findViewById(R.id.trackRecycler)
                 trackRecycler.layoutManager = LinearLayoutManager(context)
                 trackAdapter = TrackAdapter(trackList, activity as MainActivity)
 
                 trackRecycler.adapter = trackAdapter
-
+                trackNum++
             }
 
             override fun onFailure(call: Call<SongContainer>, t: Throwable) {
@@ -164,6 +168,9 @@ class ProfileFragment : Fragment() {
             fun bindItems(song: Song?) {
                 val title: TextView = itemView.findViewById(R.id.title)
                 title.text = song?.name
+
+                val title2: TextView = itemView.findViewById(R.id.rating)
+                title2.text = song?.artists!![0].name
 
 
                 itemView.setOnClickListener {

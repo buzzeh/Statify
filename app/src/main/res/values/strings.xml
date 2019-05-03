@@ -11,8 +11,8 @@
     <string name="getStarted">Get Started</string>
     <string name="welcomestrt">Get Started</string>
     <string name="base_url">https://api.spotify.com/</string>
-    <string name="welcome_username">Welcome @userName</string>
-    <string name="title"></string>
+    <string name="welcome_username">Welcome!</string>
+    <string name="title">Not Today</string>
     <string name="rating"></string>
     <string name="todo">TODO</string>
 </resources>
