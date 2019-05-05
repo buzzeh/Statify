@@ -20,10 +20,12 @@
               android:label="fragment_playlist" tools:layout="@layout/fragment_playlist">
         <action android:id="@+id/action_PlaylistFragment_to_VisualizerFragment2"
                 app:destination="@id/VisualizerFragment"/>
+        <action android:id="@+id/action_PlaylistFragment_to_ProfileFragment" app:destination="@id/ProfileFragment"/>
     </fragment>
     <fragment android:id="@+id/VisualizerFragment" android:name="com.cristhian.statify.views.VisualizerFragment"
               android:label="fragment_visualizer" tools:layout="@layout/fragment_visualizer">
         <action android:id="@+id/action_VisualizerFragment_to_PlaylistFragment2"
                 app:destination="@id/PlaylistFragment"/>
+        <action android:id="@+id/action_VisualizerFragment_to_ProfileFragment" app:destination="@id/ProfileFragment"/>
     </fragment>
 </navigation>

@@ -31,7 +31,7 @@ class PlaylistFragment : Fragment() {
                 var response = false
                 when (item.itemId) {
                     R.id.profile_nav -> {
-                        //Navigation.findNavController(view).navigate(R.id.action_login_to_profile)
+                        Navigation.findNavController(view).navigate(R.id.action_login_to_profile)
                         response = true
                     }
                     R.id.playlists_nav -> {

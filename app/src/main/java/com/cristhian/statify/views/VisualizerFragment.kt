@@ -31,7 +31,7 @@ class VisualizerFragment : Fragment() {
                 var response = false
                 when (item.itemId) {
                     R.id.profile_nav -> {
-                        //Navigation.findNavController(view).navigate(R.id.action_VisualizerFragment_to_ProfileFragment)
+                        Navigation.findNavController(view).navigate(R.id.action_VisualizerFragment_to_ProfileFragment)
                         response = true
                     }
                     R.id.playlists_nav -> {

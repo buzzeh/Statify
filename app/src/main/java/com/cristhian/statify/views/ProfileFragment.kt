@@ -2,30 +2,33 @@ package com.cristhian.statify.views
 
 
 import android.os.Bundle
-import android.os.Parcelable
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.cristhian.statify.R
-import com.cristhian.statify.SpotifyClient
-import com.cristhian.statify.objects.*
+import com.cristhian.statify.SpotifyViewModel
+import com.cristhian.statify.objects.Artist
+import com.cristhian.statify.objects.Song
+import com.cristhian.statify.objects.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class ProfileFragment : Fragment() {
 
     private var token: String? = null
+    private var user:User? = null
     private lateinit var trackRecycler: RecyclerView
     private lateinit var trackAdapter: RecyclerView.Adapter<*>
     private lateinit var artistRecycler: RecyclerView
@@ -33,73 +36,58 @@ class ProfileFragment : Fragment() {
     private var trackList: List<Song>? = null
     private var artistList: List<Artist>? = null
     private lateinit var bottomNavigation:BottomNavigationView
+    private lateinit var model: SpotifyViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        // Inflate the layvar base_url: String = "https://api.spotify.com"out for this fragment
         var view = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        var base_url: String = "https://api.spotify.com"
-        token = this.arguments?.getString("token")
-        token = "Bearer $token"
+        artistRecycler = view.findViewById(R.id.artistRecycler)
+        artistRecycler.layoutManager = LinearLayoutManager(context)
+        trackRecycler = view.findViewById(R.id.trackRecycler)
+        trackRecycler.layoutManager = LinearLayoutManager(context)
 
-        var userCall = SpotifyClient.create(base_url).getProfile(token as String)
-        var artistCall = SpotifyClient.create(base_url).getTopArtists(token as String)
-        var trackCall = SpotifyClient.create(base_url).getTopTracks(token as String)
-
-
-        userCall.enqueue(object : Callback<User> {
-            override fun onResponse(userCall: Call<User>, response: Response<User>) {
-                var user = response.body()
-                view.findViewById<TextView>(R.id.userName).text = "Welcome " + user?.display_name
-
-
-            }
-
-            override fun onFailure(userCall: Call<User>, t: Throwable) {
-                Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
-            }
-        })
-
-        artistCall.enqueue(object : Callback<ArtistContainer> {
-            override fun onResponse(call: Call<ArtistContainer>, response: Response<ArtistContainer>) {
-                var artists: ArtistContainer? = response.body()
-                artistList = artists?.items
-                artistRecycler = view.findViewById(R.id.artistRecycler)
-                artistRecycler.layoutManager = LinearLayoutManager(context)
-                artistAdapter = ArtistAdapter(artistList, activity as MainActivity)
-
+        //set up artist recycler view with information retrieved from the model
+        model = activity.run { ViewModelProviders.of(this!!).get(SpotifyViewModel::class.java) }
+        model?.artists?.observe(
+            this,
+            Observer<List<Artist>> { list ->
+                artistAdapter = ArtistAdapter(list, activity as MainActivity)
                 artistRecycler.adapter = artistAdapter
             }
 
-            override fun onFailure(call: Call<ArtistContainer>, t: Throwable) {
+        )
 
-                Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
+
+        //set up user from information received from the model
+        model?.user?.observe(
+            this,
+            Observer<User> { user ->
+                view.findViewById<TextView>(R.id.userName).text = "Welcome, ${user.display_name}!"
             }
-        })
 
-        trackCall.enqueue(object : Callback<SongContainer> {
-            override fun onResponse(call: Call<SongContainer>, response: Response<SongContainer>) {
-                var tracks: SongContainer? = response.body()
-                trackList = tracks?.items
-                trackList!![0].artists[0]
-                trackRecycler = view.findViewById(R.id.trackRecycler)
-                trackRecycler.layoutManager = LinearLayoutManager(context)
-                trackAdapter = TrackAdapter(trackList, activity as MainActivity)
+        )
 
+
+        //set up track recycler view with information from the
+        model?.tracks?.observe(
+            this,
+            Observer<List<Song>> { list ->
+                trackAdapter = TrackAdapter(list, activity as MainActivity)
                 trackRecycler.adapter = trackAdapter
             }
 
-            override fun onFailure(call: Call<SongContainer>, t: Throwable) {
+        )
 
-                Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
-            }
-        })
 
+
+//
         bottomNavigation= view.findViewById(R.id.bottom_navigation)
-
+//
         bottomNavigation.setOnNavigationItemSelectedListener(object:
             BottomNavigationView.OnNavigationItemSelectedListener {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
