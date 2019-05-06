@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.navigation.Navigation
@@ -26,6 +27,17 @@ class VisualizerFragment : Fragment() {
         var view = inflater.inflate(R.layout.fragment_visualizer, container, false)
 
         bottomNavigation = view.findViewById(R.id.bottom_navigation)
+
+        var pb_1 = view.findViewById<ProgressBar>(R.id.rythm_bar)
+        var pb_2 = view.findViewById<ProgressBar>(R.id.progressBar2)
+        var pb_3 = view.findViewById<ProgressBar>(R.id.progressBar3)
+        var pb_4 = view.findViewById<ProgressBar>(R.id.progressBar4)
+
+        pb_1.progress = 50
+        pb_2.progress = 41
+        pb_3.progress = 86
+        pb_4.progress = 17
+
 
         bottomNavigation.setOnNavigationItemSelectedListener(object :
             BottomNavigationView.OnNavigationItemSelectedListener {
