@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.navigation.Navigation
 import com.cristhian.statify.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
+import kotlinx.android.synthetic.main.fragment_visualizer.*
 
 
 class VisualizerFragment : Fragment() {
@@ -47,8 +49,14 @@ class VisualizerFragment : Fragment() {
             }
         })
 
+//        show_stats.setOnClickListener {
+//            Toast.makeText(getContext(), "hi", LENGTH_SHORT).show()
+//        }
+
         return view
     }
+
+
 
 
 

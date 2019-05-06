@@ -93,6 +93,13 @@
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/textView7" android:layout_marginBottom="48dp"
             app:layout_constraintBottom_toBottomOf="@+id/progressBar4"/>
+    <Button
+            android:text="Show Stats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/show_stats" app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="484dp"
+            android:layout_marginStart="150dp" app:layout_constraintHorizontal_bias="0.0"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
