@@ -53,7 +53,7 @@ class ProfileFragment : Fragment() {
 
         //set up artist recycler view with information retrieved from the model
         model = activity.run { ViewModelProviders.of(this!!).get(SpotifyViewModel::class.java) }
-        model?.artists?.observe(
+        model.artists.observe(
             this,
             Observer<List<Artist>> { list ->
                 artistAdapter = ArtistAdapter(list, activity as MainActivity)
@@ -64,7 +64,7 @@ class ProfileFragment : Fragment() {
 
 
         //set up user from information received from the model
-        model?.user?.observe(
+        model.user.observe(
             this,
             Observer<User> { user ->
                 view.findViewById<TextView>(R.id.userName).text = "Welcome, ${user.display_name}!"
@@ -74,7 +74,7 @@ class ProfileFragment : Fragment() {
 
 
         //set up track recycler view with information from the
-        model?.tracks?.observe(
+        model.tracks.observe(
             this,
             Observer<List<Song>> { list ->
                 trackAdapter = TrackAdapter(list, activity as MainActivity)
@@ -110,6 +110,8 @@ class ProfileFragment : Fragment() {
 
             }
         })
+
+
 
 
         return view
@@ -158,11 +160,8 @@ class ProfileFragment : Fragment() {
 
                 itemView.setOnClickListener {
 
-                    // portrait
-                    //if (activity.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+                    Toast.makeText(context, "Its " + song.name, Toast.LENGTH_SHORT).show()
 
-                    // landscape
-                    //else
                 }
             }
         }
@@ -206,8 +205,6 @@ class ProfileFragment : Fragment() {
                 title.text = artist?.name
 
                 itemView.setOnClickListener {
-
-
                 }
             }
 
