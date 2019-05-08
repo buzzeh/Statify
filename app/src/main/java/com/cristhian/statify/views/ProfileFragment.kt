@@ -43,7 +43,7 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layvar base_url: String = "https://api.spotify.com"out for this fragment
+        // Inflate the view for this fragment
         var view = inflater.inflate(R.layout.fragment_profile, container, false)
 
         artistRecycler = view.findViewById(R.id.artistRecycler)
