@@ -55,6 +55,8 @@ class SpotifyViewModel(application: Application): AndroidViewModel(application) 
 
     private var disposable4: Disposable? = null
 
+    private var disposable5: Disposable? = null
+
     override fun onCleared() {
         super.onCleared()
         scope.cancel()
@@ -118,13 +120,32 @@ class SpotifyViewModel(application: Application): AndroidViewModel(application) 
 
     private fun fillLibrary(items: List<LibraryItem>) {
         items.forEach { item ->
-            insert(item.track) //inserts minified song
+            getFeatures(item)
+
         }
 
     }
 
     private fun insert(song: MinifiedSong) = scope.launch(Dispatchers.IO) {
+        Log.d("Insert", song.toString())
         repository.insert(song)
+    }
+
+    private fun getFeatures( item: LibraryItem) {
+        if (token != null) {
+            disposable5 = SpotifyClient.create(base_url).getAudioFeatures(token!!, item.track.id).subscribeOn(
+                Schedulers.io()).observeOn(
+                AndroidSchedulers.mainThread()).subscribe(
+                {result ->
+                    var name = item.track.name
+                    result.name = name
+                    insert(result)
+
+                },
+                {error -> Log.d("Features", error.localizedMessage)})
+
+        }
+
     }
 
 }
