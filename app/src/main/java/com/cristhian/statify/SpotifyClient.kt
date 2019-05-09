@@ -2,6 +2,7 @@ package com.cristhian.statify
 
 
 import com.cristhian.statify.objects.ArtistContainer
+import com.cristhian.statify.objects.LibraryContainer
 import com.cristhian.statify.objects.SongContainer
 import com.cristhian.statify.objects.User
 import io.reactivex.Observable
@@ -12,6 +13,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Query
 import java.util.*
 
 interface  SpotifyClient {
@@ -45,4 +47,8 @@ interface  SpotifyClient {
     @GET("v1/me/top/tracks?time_range=short_term&limit=4")
     fun getTopTracks(@Header("Authorization") token:String): Observable<SongContainer>
 
+    @GET("/v1/me/tracks")
+    fun getUserLibrary(@Header("Authorization") token:String, @Query("offset") offset: Int, @Query("limit") limit: Int): Observable<LibraryContainer>
+
+//, @Query("offset") offset: Int, @Query("limit") limit: Int
 }

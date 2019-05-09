@@ -45,7 +45,7 @@ class LoginFragment : Fragment() {
             if (token == null) {
 
                 val request = AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI)
-                    .setScopes(arrayOf("user-read-email", "user-read-birthdate","user-read-private", "playlist-read", "playlist-read-private", "user-top-read", "streaming"))
+                    .setScopes(arrayOf("user-read-email", "user-read-birthdate", "user-library-read", "user-read-private", "playlist-read", "playlist-read-private", "user-top-read", "streaming"))
                     .build()
                 val intent = AuthenticationClient.createLoginActivityIntent(activity!!, request)
                 startActivityForResult(intent, REQUEST_CODE)
@@ -73,7 +73,8 @@ class LoginFragment : Fragment() {
                     model.retrieveUser()
                     model.retrieveTopArtists()
                     model.retrieveTopTracks()
-                    Log.d(TAG, token)
+                    model.getLibrary()
+                    Log.d("Token", token)
                     loggedIn = true
                     Navigation.findNavController(view as View).navigate(R.id.action_login_to_profile, bundleOf("token" to token))
                 }

@@ -19,9 +19,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.cristhian.statify.R
 import com.cristhian.statify.SpotifyViewModel
-import com.cristhian.statify.objects.Artist
-import com.cristhian.statify.objects.Song
-import com.cristhian.statify.objects.User
+import com.cristhian.statify.objects.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -63,6 +61,7 @@ class ProfileFragment : Fragment() {
         )
 
 
+
         //set up user from information received from the model
         model.user.observe(
             this,
@@ -70,6 +69,12 @@ class ProfileFragment : Fragment() {
                 view.findViewById<TextView>(R.id.userName).text = "Welcome, ${user.display_name}!"
             }
 
+        )
+        model.library.observe(
+            this,
+            Observer<List<MinifiedSong>> { list ->
+                Toast.makeText(context, list[0].name, Toast.LENGTH_LONG).show()
+            }
         )
 
 

@@ -4,19 +4,15 @@ import android.app.Application
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.cristhian.statify.database.SongRepository
+import com.cristhian.statify.database.SongRoomDatabase
 import com.cristhian.statify.objects.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 
@@ -31,11 +27,16 @@ class SpotifyViewModel(application: Application): AndroidViewModel(application) 
     var user: MutableLiveData<User>
     var artists:MutableLiveData<List<Artist>>
     var tracks:MutableLiveData<List<Song>>
+    var library: LiveData<List<MinifiedSong>>
+
+    //private var db = SongRoomDatabase.getDatabase(application)
+    private var repository = SongRepository(SongRoomDatabase.getDatabase(application).songDao())
 
     init {
         user = MutableLiveData()
         artists = MutableLiveData()
         tracks = MutableLiveData()
+        library = repository.library
     }
 
     private var parentJob = Job()
@@ -52,6 +53,12 @@ class SpotifyViewModel(application: Application): AndroidViewModel(application) 
 
     private var disposable3: Disposable? = null
 
+    private var disposable4: Disposable? = null
+
+    override fun onCleared() {
+        super.onCleared()
+        scope.cancel()
+    }
 
 
     fun retrieveUser(): User? {
@@ -93,10 +100,31 @@ class SpotifyViewModel(application: Application): AndroidViewModel(application) 
 
     }
 
+    fun getLibrary() {
+        deleteLibrary()
+        if (token != null) {
+            disposable4 = SpotifyClient.create(base_url).getUserLibrary(token!!, 20,20).subscribeOn(
+                Schedulers.io()).observeOn(
+                AndroidSchedulers.mainThread()).subscribe(
+                {result -> fillLibrary(result.items)},
+                {error -> Log.d(TAG, error.toString())})
 
+        }
+    }
 
+    private fun deleteLibrary() = scope.launch (Dispatchers.IO){
+        //repository.deleteAll()
+    }
 
+    private fun fillLibrary(items: List<LibraryItem>) {
+        items.forEach { item ->
+            insert(item.track) //inserts minified song
+        }
 
+    }
 
+    private fun insert(song: MinifiedSong) = scope.launch(Dispatchers.IO) {
+        repository.insert(song)
+    }
 
 }
