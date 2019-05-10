@@ -2,11 +2,8 @@ package com.cristhian.statify.views
 
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.Navigation
@@ -114,6 +111,15 @@ class PlaylistFragment : Fragment() {
         override fun getItemCount() = features?.size as Int
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val window = activity!!.window
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = activity!!.resources.getColor(R.color.colorPrimaryDark)
     }
 
 

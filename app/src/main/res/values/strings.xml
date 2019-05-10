@@ -15,4 +15,7 @@
     <string name="title">Not Today</string>
     <string name="rating"></string>
     <string name="todo">TODO</string>
+    <string name="tracksIntro">Track Stats</string>
+    <string name="artistSelectTime">Select your time period here:</string>
+    <string name="your_top_artists">Your Top Artists</string>
 </resources>

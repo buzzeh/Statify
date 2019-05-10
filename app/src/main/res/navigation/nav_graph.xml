@@ -15,6 +15,8 @@
         <action android:id="@+id/action_ProfileFragment_to_PlaylistFragment" app:destination="@id/PlaylistFragment"/>
         <action android:id="@+id/action_ProfileFragment_to_VisualizerFragment"
                 app:destination="@id/VisualizerFragment"/>
+        <action android:id="@+id/action_ProfileFragment_to_track_stats" app:destination="@id/track_stats"/>
+        <action android:id="@+id/action_ProfileFragment_to_artists_stats" app:destination="@id/artists_stats"/>
     </fragment>
     <fragment android:id="@+id/PlaylistFragment" android:name="com.cristhian.statify.views.PlaylistFragment"
               android:label="fragment_playlist" tools:layout="@layout/fragment_playlist">
@@ -27,5 +29,17 @@
         <action android:id="@+id/action_VisualizerFragment_to_PlaylistFragment2"
                 app:destination="@id/PlaylistFragment"/>
         <action android:id="@+id/action_VisualizerFragment_to_ProfileFragment" app:destination="@id/ProfileFragment"/>
+    </fragment>
+    <fragment android:id="@+id/track_stats" android:name="com.cristhian.statify.views.track_stats"
+              android:label="fragment_track_stats" tools:layout="@layout/fragment_track_stats">
+        <action android:id="@+id/action_track_stats_to_ProfileFragment" app:destination="@id/ProfileFragment"/>
+        <action android:id="@+id/action_track_stats_to_VisualizerFragment" app:destination="@id/VisualizerFragment"/>
+        <action android:id="@+id/action_track_stats_to_PlaylistFragment" app:destination="@id/PlaylistFragment"/>
+    </fragment>
+    <fragment android:id="@+id/artists_stats" android:name="com.cristhian.statify.views.artists_stats"
+              android:label="fragment_artists_stats" tools:layout="@layout/fragment_artists_stats">
+        <action android:id="@+id/action_artists_stats_to_ProfileFragment" app:destination="@id/ProfileFragment"/>
+        <action android:id="@+id/action_artists_stats_to_VisualizerFragment" app:destination="@id/VisualizerFragment"/>
+        <action android:id="@+id/action_artists_stats_to_PlaylistFragment" app:destination="@id/PlaylistFragment"/>
     </fragment>
 </navigation>

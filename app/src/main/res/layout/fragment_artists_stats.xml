@@ -4,17 +4,17 @@
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
-                                                   tools:context=".views.ProfileFragment"
+                                                   tools:context=".views.artists_stats"
                                                    android:id="@+id/constlayout">
     <androidx.appcompat.widget.Toolbar
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
+            android:background="#1B6AA5"
             android:theme="?attr/actionBarTheme"
             android:minHeight="?attr/actionBarSize"
             android:id="@+id/toolbar" android:layout_width="0dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:title="Profile" app:subtitle="Your personal stats"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" app:title="Artists"
+            app:layout_constraintTop_toTopOf="parent" app:subtitle="Stats"/>
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp" tools:layout_editor_absoluteX="0dp"
@@ -25,56 +25,41 @@
                                                            android:layout_height="1200dp"
                                                            android:id="@+id/linearLayout">
             <TextView
-                    android:text="@string/welcome_username"
+                    android:text="@string/artistSelectTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/userName" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="32dp" app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="32dp"
-                    android:textSize="24sp"
-                    app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="4dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1" android:textStyle="bold"
-                    android:textColor="@android:color/background_dark"/>
-            <TextView
-                    android:text="Your Top Tracks"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textView8"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/spinner"
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                    android:textStyle="bold" android:textColor="#000000" android:layout_marginTop="16dp"
+                    android:textSize="18sp"/>
+            <Spinner
+                    android:layout_width="395dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/topTracks" app:layout_constraintStart_toStartOf="parent"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/trackRecycler" android:layout_marginBottom="192dp"
-                    android:layout_marginTop="4dp" app:layout_constraintTop_toBottomOf="@+id/userName"
-                    android:layout_marginStart="8dp" android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+                    android:id="@+id/spinner"
+                    app:layout_constraintBottom_toTopOf="@+id/select" android:layout_marginBottom="16dp"
+                    android:spinnerMode="dialog"
+                    app:layout_constraintTop_toBottomOf="@+id/textView8" android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
             <TextView
-                    android:text="Your Top Artists"
+                    android:text="@string/your_top_artists"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/select" app:layout_constraintStart_toStartOf="parent"
                     android:textSize="18sp"
-                    android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/trackRecycler"
-                    android:layout_marginStart="8dp" android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+                    android:layout_marginStart="8dp" android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    app:layout_constraintTop_toBottomOf="@+id/spinner" android:layout_marginTop="8dp"/>
             <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="0dp"
-                    android:layout_height="245dp"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    android:id="@+id/trackRecycler"
-                    android:layout_marginTop="4dp" app:layout_constraintTop_toBottomOf="@+id/topTracks"
-                    android:nestedScrollingEnabled="false" android:isScrollContainer="false"
-                    app:fastScrollEnabled="false" android:fadeScrollbars="false"
-                    android:scrollbarAlwaysDrawHorizontalTrack="false"
-                    android:scrollbarAlwaysDrawVerticalTrack="false" android:scrollbarFadeDuration="5"
-                    android:scrollbarDefaultDelayBeforeFade="5" android:scrollbarSize="1dp"/>
-            <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="0dp"
-                    android:layout_height="245dp"
+                    android:layout_height="500dp"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp" android:layout_marginEnd="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:id="@+id/artistRecycler"
                     app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="8dp"
                     app:layout_constraintTop_toBottomOf="@+id/select" android:nestedScrollingEnabled="false"
-                    android:isScrollContainer="false"/>
+                    app:layout_constraintBottom_toBottomOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -82,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_gravity="bottom"
-            android:background="@color/colorAccent"
+            android:background="#1B6AA5"
             app:itemIconTint="@color/whiteColor"
             app:itemTextColor="@color/whiteColor"
             app:menu="@menu/menu"

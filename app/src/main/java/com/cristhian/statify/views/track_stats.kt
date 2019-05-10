@@ -3,9 +3,7 @@ package com.cristhian.statify.views
 
 import android.os.Bundle
 import android.view.*
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -19,20 +17,18 @@ import com.cristhian.statify.R
 import com.cristhian.statify.SpotifyViewModel
 import com.cristhian.statify.objects.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.fragment_artists_stats.*
 
 
-class ProfileFragment : Fragment() {
+class track_stats : Fragment() {
 
-    private var token: String? = null
-    private var user:User? = null
+
     private lateinit var trackRecycler: RecyclerView
     private lateinit var trackAdapter: RecyclerView.Adapter<*>
-    private lateinit var artistRecycler: RecyclerView
     private lateinit var artistAdapter: RecyclerView.Adapter<*>
-    private var trackList: List<Song>? = null
-    private var artistList: List<Artist>? = null
-    private lateinit var bottomNavigation:BottomNavigationView
     private lateinit var model: SpotifyViewModel
+    private lateinit var bottomNavigation: BottomNavigationView
+    private lateinit var optionSpinner: Spinner
 
 
     override fun onCreateView(
@@ -40,12 +36,36 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the view for this fragment
-        var view = inflater.inflate(R.layout.fragment_profile, container, false)
-
-        artistRecycler = view.findViewById(R.id.artistRecycler)
-        artistRecycler.layoutManager = LinearLayoutManager(context)
+        var view = inflater.inflate(R.layout.fragment_track_stats, container, false)
         trackRecycler = view.findViewById(R.id.trackRecycler)
         trackRecycler.layoutManager = LinearLayoutManager(context)
+
+        var values = arrayOf("Last 4 Weeks", "Last 6 Months", "All Time")
+        optionSpinner = view.findViewById(R.id.spinner2) as Spinner
+
+
+        optionSpinner.adapter = ArrayAdapter<String>(context, R.layout.spinner_item, values)
+
+        optionSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Toast.makeText(context, "Nothing Selected", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+
+                if (values.get(position).equals("Last 4 Weeks")) {
+
+                } else if (values.get(position).equals("Last 6 Months")) {
+
+                } else if (values.get(position).equals("All Time")) {
+
+                }
+
+
+                Toast.makeText(context, values.get(position), Toast.LENGTH_SHORT).show()
+            }
+        }
 
         //set up artist recycler view with information retrieved from the model
         model = activity.run { ViewModelProviders.of(this!!).get(SpotifyViewModel::class.java) }
@@ -53,26 +73,8 @@ class ProfileFragment : Fragment() {
             this,
             Observer<List<Artist>> { list ->
                 artistAdapter = ArtistAdapter(list, activity as MainActivity)
-                artistRecycler.adapter = artistAdapter
             }
 
-        )
-
-
-
-        //set up user from information received from the model
-        model.user.observe(
-            this,
-            Observer<User> { user ->
-                view.findViewById<TextView>(R.id.userName).text = "Welcome, ${user.display_name}!"
-            }
-
-        )
-        model.library.observe(
-            this,
-            Observer<List<MinifiedSong>> { list ->
-                Toast.makeText(context, list[0].name, Toast.LENGTH_LONG).show()
-            }
         )
 
 
@@ -87,25 +89,23 @@ class ProfileFragment : Fragment() {
         )
 
 
-
+        bottomNavigation = view.findViewById(R.id.bottom_navigation)
 //
-        bottomNavigation= view.findViewById(R.id.bottom_navigation)
-//
-        bottomNavigation.setOnNavigationItemSelectedListener(object:
+        bottomNavigation.setOnNavigationItemSelectedListener(object :
             BottomNavigationView.OnNavigationItemSelectedListener {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
                 var response = false
                 when (item.itemId) {
                     R.id.profile_nav -> {
-
+                        Navigation.findNavController(view).navigate(R.id.action_track_stats_to_ProfileFragment)
                         response = true
                     }
                     R.id.playlists_nav -> {
-                        Navigation.findNavController(view).navigate(R.id.action_ProfileFragment_to_PlaylistFragment)
+                        Navigation.findNavController(view).navigate(R.id.action_track_stats_to_PlaylistFragment)
                         response = true
                     }
                     R.id.visualizer_nav -> {
-                        Navigation.findNavController(view).navigate(R.id.action_ProfileFragment_to_VisualizerFragment)
+                        Navigation.findNavController(view).navigate(R.id.action_track_stats_to_VisualizerFragment)
                         response = true
                     }
                 }
@@ -114,9 +114,6 @@ class ProfileFragment : Fragment() {
             }
         })
 
-
-
-
         return view
     }
 
@@ -124,14 +121,6 @@ class ProfileFragment : Fragment() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        val window = activity!!.window
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = activity!!.resources.getColor(R.color.colorPrimaryDark)
-    }
 
     inner class TrackAdapter(private val tracks: List<Song>?, private val mainActivity: MainActivity) :
         RecyclerView.Adapter<TrackAdapter.ViewHolder>() {
@@ -170,9 +159,6 @@ class ProfileFragment : Fragment() {
 
                 itemView.setOnClickListener {
                     //Toast.makeText(context, "Its " + song.name, Toast.LENGTH_SHORT).show()
-                    Navigation.findNavController(view).navigate(R.id.action_ProfileFragment_to_track_stats)
-
-
                 }
             }
         }
@@ -216,7 +202,6 @@ class ProfileFragment : Fragment() {
                 title.text = artist?.name
 
                 itemView.setOnClickListener {
-                    Navigation.findNavController(view).navigate(R.id.action_ProfileFragment_to_artists_stats)
                 }
             }
 
@@ -225,6 +210,15 @@ class ProfileFragment : Fragment() {
         // Return the size of your dataset (invoked by the layout manager)
         override fun getItemCount() = artists?.size as Int
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val window = activity!!.window
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = activity!!.resources.getColor(R.color.prettyBlueDark)
     }
 }
 
