@@ -71,8 +71,8 @@ class LoginFragment : Fragment() {
                     token = response.accessToken
                     model.token = "Bearer $token"
                     model.retrieveUser()
-                    model.retrieveTopArtists()
-                    model.retrieveTopTracks()
+                    model.retrieveTopArtists("short_term", 4)
+                    model.retrieveTopTracks("short_term", 4)
                     model.getLibrary()
                     Log.d("Token", token)
                     loggedIn = true

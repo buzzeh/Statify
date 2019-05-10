@@ -15,8 +15,8 @@
         <action android:id="@+id/action_ProfileFragment_to_PlaylistFragment" app:destination="@id/PlaylistFragment"/>
         <action android:id="@+id/action_ProfileFragment_to_VisualizerFragment"
                 app:destination="@id/VisualizerFragment"/>
-        <action android:id="@+id/action_ProfileFragment_to_track_stats" app:destination="@id/track_stats"/>
         <action android:id="@+id/action_ProfileFragment_to_artists_stats" app:destination="@id/artists_stats"/>
+        <action android:id="@+id/action_ProfileFragment_to_track_stats" app:destination="@id/track_stats"/>
     </fragment>
     <fragment android:id="@+id/PlaylistFragment" android:name="com.cristhian.statify.views.PlaylistFragment"
               android:label="fragment_playlist" tools:layout="@layout/fragment_playlist">

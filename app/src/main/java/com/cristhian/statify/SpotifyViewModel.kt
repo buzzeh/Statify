@@ -77,10 +77,10 @@ class SpotifyViewModel(application: Application): AndroidViewModel(application) 
         return user.value
     }
 
-    fun retrieveTopArtists(){
+    fun retrieveTopArtists(timeRange: String, limit: Int){
         if (token != null) {
             scope.launch { Dispatchers.IO }
-            disposable2 = SpotifyClient.create(base_url).getTopArtists(token!!).subscribeOn(
+            disposable2 = SpotifyClient.create(base_url).getTopArtists(token!!, timeRange, limit).subscribeOn(
                 Schedulers.io()).observeOn(
                 AndroidSchedulers.mainThread()).subscribe(
                 {result -> artists.value = result.items},
@@ -89,10 +89,10 @@ class SpotifyViewModel(application: Application): AndroidViewModel(application) 
         }
     }
 
-    fun retrieveTopTracks(){
+    fun retrieveTopTracks(timeRange: String, limit: Int){
         if (token != null) {
             scope.launch { Dispatchers.IO }
-            disposable3 = SpotifyClient.create(base_url).getTopTracks(token!!).subscribeOn(
+            disposable3 = SpotifyClient.create(base_url).getTopTracks(token!!, timeRange, limit).subscribeOn(
                 Schedulers.io()).observeOn(
                 AndroidSchedulers.mainThread()).subscribe(
                 {result -> tracks.value = result.items},

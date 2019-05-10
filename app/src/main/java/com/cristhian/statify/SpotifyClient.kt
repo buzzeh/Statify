@@ -34,11 +34,11 @@ interface  SpotifyClient {
         }
     }
 
-    @GET("v1/me/top/artists?time_range=short_term&limit=4")
-    fun getTopArtists(@Header("Authorization") token: String): Observable<ArtistContainer>
+    @GET("v1/me/top/artists")
+    fun getTopArtists(@Header("Authorization") token: String, @Query("time_range") timeRange:String, @Query("limit") limit:Int): Observable<ArtistContainer>
 
-    @GET("v1/me/top/tracks?time_range=short_term&limit=4")
-    fun getTopTracks(@Header("Authorization") token: String): Observable<SongContainer>
+    @GET("v1/me/top/tracks")
+    fun getTopTracks(@Header("Authorization") token: String, @Query("time_range") timeRange:String, @Query("limit") limit:Int): Observable<SongContainer>
 
     @GET("/v1/me/tracks")
     fun getUserLibrary(@Header("Authorization") token: String, @Query("offset") offset: Int, @Query("limit") limit: Int): Observable<LibraryContainer>

@@ -17,6 +17,7 @@ import com.cristhian.statify.R
 import com.cristhian.statify.SpotifyViewModel
 import com.cristhian.statify.objects.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.cristhian.statify.objects.Artist as Artist1
 
 
 class artists_stats : Fragment() {
@@ -40,6 +41,19 @@ class artists_stats : Fragment() {
 
 
         var values = arrayOf("Last 4 Weeks", "Last 6 Months", "All Time")
+
+
+        //set up artist recycler view with information retrieved from the model
+        model = activity.run { ViewModelProviders.of(this!!).get(SpotifyViewModel::class.java) }
+        model.artists.observe(
+            this,
+            Observer<List<Artist1>> { list ->
+                artistAdapter = ArtistAdapter(list, activity as MainActivity)
+                artistRecycler.adapter = artistAdapter
+            }
+
+        )
+
         optionSpinner = view.findViewById(R.id.spinner) as Spinner
 
 
@@ -53,56 +67,38 @@ class artists_stats : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
 
-                if (values.get(position).equals("Last 4 Weeks")) {
-
-                } else if (values.get(position).equals("Last 6 Months")) {
-
-                } else if (values.get(position).equals("All Time")) {
-
+                when {
+                    values[position] == "Last 4 Weeks" -> model.retrieveTopArtists("short_term", 10)
+                    values[position] == "Last 6 Months" -> model.retrieveTopArtists("medium_term", 10)
+                    values[position] == "All Time" -> model.retrieveTopArtists("long_term", 10)
                 }
 
 
-                Toast.makeText(context, values.get(position), Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, values[position], Toast.LENGTH_SHORT).show()
             }
         }
 
 
-        //set up artist recycler view with information retrieved from the model
-        model = activity.run { ViewModelProviders.of(this!!).get(SpotifyViewModel::class.java) }
-        model.artists.observe(
-            this,
-            Observer<List<Artist>> { list ->
-                artistAdapter = ArtistAdapter(list, activity as MainActivity)
-                artistRecycler.adapter = artistAdapter
-            }
-
-        )
-
-
         bottomNavigation = view.findViewById(R.id.bottom_navigation)
 //
-        bottomNavigation.setOnNavigationItemSelectedListener(object :
-            BottomNavigationView.OnNavigationItemSelectedListener {
-            override fun onNavigationItemSelected(item: MenuItem): Boolean {
-                var response = false
-                when (item.itemId) {
-                    R.id.profile_nav -> {
-                        Navigation.findNavController(view).navigate(R.id.action_artists_stats_to_ProfileFragment)
-                        response = true
-                    }
-                    R.id.playlists_nav -> {
-                        Navigation.findNavController(view).navigate(R.id.action_artists_stats_to_PlaylistFragment)
-                        response = true
-                    }
-                    R.id.visualizer_nav -> {
-                        Navigation.findNavController(view).navigate(R.id.action_artists_stats_to_VisualizerFragment)
-                        response = true
-                    }
+        bottomNavigation.setOnNavigationItemSelectedListener { item ->
+            var response = false
+            when (item.itemId) {
+                R.id.profile_nav -> {
+                    Navigation.findNavController(view).navigate(R.id.action_artists_stats_to_ProfileFragment)
+                    response = true
                 }
-                return response
-
+                R.id.playlists_nav -> {
+                    Navigation.findNavController(view).navigate(R.id.action_artists_stats_to_PlaylistFragment)
+                    response = true
+                }
+                R.id.visualizer_nav -> {
+                    Navigation.findNavController(view).navigate(R.id.action_artists_stats_to_VisualizerFragment)
+                    response = true
+                }
             }
-        })
+            response
+        }
 
 
         return view
@@ -121,7 +117,7 @@ class artists_stats : Fragment() {
         window.statusBarColor = activity!!.resources.getColor(R.color.prettyBlueDark)
     }
 
-    inner class ArtistAdapter(private val artists: List<Artist>?, private val mainActivity: MainActivity) :
+    inner class ArtistAdapter(private val artists: List<Artist1>?, private val mainActivity: MainActivity) :
         RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
         override fun onCreateViewHolder(
             parent: ViewGroup,
@@ -145,7 +141,7 @@ class artists_stats : Fragment() {
         }
 
         inner class ViewHolder(val view: View, private val activity: MainActivity) : RecyclerView.ViewHolder(view) {
-            fun bindItems(artist: Artist?) {
+            fun bindItems(artist: Artist1?) {
 
                 val title: TextView = itemView.findViewById(R.id.title)
                 title.text = artist?.name

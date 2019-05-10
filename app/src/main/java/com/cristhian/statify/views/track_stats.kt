@@ -4,7 +4,6 @@ package com.cristhian.statify.views
 import android.os.Bundle
 import android.view.*
 import android.widget.*
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -17,7 +16,6 @@ import com.cristhian.statify.R
 import com.cristhian.statify.SpotifyViewModel
 import com.cristhian.statify.objects.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.fragment_artists_stats.*
 
 
 class track_stats : Fragment() {
@@ -41,34 +39,10 @@ class track_stats : Fragment() {
         trackRecycler.layoutManager = LinearLayoutManager(context)
 
         var values = arrayOf("Last 4 Weeks", "Last 6 Months", "All Time")
-        optionSpinner = view.findViewById(R.id.spinner2) as Spinner
-
-
-        optionSpinner.adapter = ArrayAdapter<String>(context, R.layout.spinner_item, values)
-
-        optionSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                Toast.makeText(context, "Nothing Selected", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
-
-                if (values.get(position).equals("Last 4 Weeks")) {
-
-                } else if (values.get(position).equals("Last 6 Months")) {
-
-                } else if (values.get(position).equals("All Time")) {
-
-                }
-
-
-                Toast.makeText(context, values.get(position), Toast.LENGTH_SHORT).show()
-            }
-        }
 
         //set up artist recycler view with information retrieved from the model
         model = activity.run { ViewModelProviders.of(this!!).get(SpotifyViewModel::class.java) }
+
         model.artists.observe(
             this,
             Observer<List<Artist>> { list ->
@@ -88,6 +62,34 @@ class track_stats : Fragment() {
 
         )
 
+        optionSpinner = view.findViewById(R.id.spinner2) as Spinner
+
+
+        optionSpinner.adapter = ArrayAdapter<String>(context, R.layout.spinner_item, values)
+
+        optionSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Toast.makeText(context, "Nothing Selected", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+
+                if (values[position] == "Last 4 Weeks") {
+                    model.retrieveTopTracks("short_term", 10)
+
+                } else if (values[position] == "Last 6 Months") {
+                    model.retrieveTopTracks("medium_term", 10)
+
+                } else if (values[position] == "All Time") {
+                    model.retrieveTopTracks("long_term", 10)
+
+                }
+
+
+                Toast.makeText(context, values.get(position), Toast.LENGTH_SHORT).show()
+            }
+        }
 
         bottomNavigation = view.findViewById(R.id.bottom_navigation)
 //
