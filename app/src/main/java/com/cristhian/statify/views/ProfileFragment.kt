@@ -68,12 +68,12 @@ class ProfileFragment : Fragment() {
             }
 
         )
-        model.library.observe(
-            this,
-            Observer<List<MinifiedSong>> { list ->
-                Toast.makeText(context, list[0].name, Toast.LENGTH_LONG).show()
-            }
-        )
+//        model.library.observe(
+//            this,
+//            Observer<List<MinifiedSong>> { list ->
+//                //Toast.makeText(context, list[0].name, Toast.LENGTH_LONG).show()
+//            }
+//        )
 
 
         //set up track recycler view with information from the

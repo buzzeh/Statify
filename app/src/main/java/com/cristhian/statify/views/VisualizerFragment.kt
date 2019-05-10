@@ -3,19 +3,24 @@ package com.cristhian.statify.views
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.navigation.Navigation
 import com.cristhian.statify.R
+import com.cristhian.statify.SpotifyViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_visualizer.*
+import kotlin.random.Random
 
 
 class VisualizerFragment : Fragment() {
 
     private lateinit var bottomNavigation: BottomNavigationView
+    private lateinit var model: SpotifyViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,6 +34,16 @@ class VisualizerFragment : Fragment() {
         var pb_2 = view.findViewById<ProgressBar>(R.id.progressBar2)
         var pb_3 = view.findViewById<ProgressBar>(R.id.progressBar3)
         var pb_4 = view.findViewById<ProgressBar>(R.id.progressBar4)
+
+        var num_text_1 = view.findViewById<TextView>(R.id.textView10)
+        var num_text_2 = view.findViewById<TextView>(R.id.textView11)
+        var num_text_3 = view.findViewById<TextView>(R.id.textView12)
+        var num_text_4 = view.findViewById<TextView>(R.id.textView13)
+
+
+
+        var show_stats:Button = view.findViewById(R.id.show_stats)
+
 
         pb_1.progress = 50
         pb_2.progress = 41
@@ -58,9 +73,21 @@ class VisualizerFragment : Fragment() {
             }
         })
 
-//        show_stats.setOnClickListener {
-//            Toast.makeText(getContext(), "hi", LENGTH_SHORT).show()
-//        }
+        show_stats.setOnClickListener {
+            Toast.makeText(getContext(), "hi", LENGTH_SHORT).show()
+            var a = Random.nextInt(0, 100)
+            var b = Random.nextInt(0, 100)
+            var c = Random.nextInt(0, 100)
+            var d = Random.nextInt(0, 100)
+            pb_1.progress = a
+            num_text_1.setText(a.toString())
+            pb_2.progress = b
+            num_text_2.setText(b.toString())
+            pb_3.progress = c
+            num_text_3.setText(c.toString())
+            pb_4.progress = d
+            num_text_4.setText(d.toString())
+        }
 
         return view
     }
