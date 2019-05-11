@@ -34,11 +34,18 @@ class VisualizerFragment : Fragment() {
         var pb_2 = view.findViewById<ProgressBar>(R.id.progressBar2)
         var pb_3 = view.findViewById<ProgressBar>(R.id.progressBar3)
         var pb_4 = view.findViewById<ProgressBar>(R.id.progressBar4)
+        var pb_5 = view.findViewById<ProgressBar>(R.id.progressBar5)
+        var pb_6 = view.findViewById<ProgressBar>(R.id.progressBar6)
+
+
 
         var num_text_1 = view.findViewById<TextView>(R.id.textView10)
         var num_text_2 = view.findViewById<TextView>(R.id.textView11)
         var num_text_3 = view.findViewById<TextView>(R.id.textView12)
         var num_text_4 = view.findViewById<TextView>(R.id.textView13)
+        var num_text_5 = view.findViewById<TextView>(R.id.textView14)
+        var num_text_6 = view.findViewById<TextView>(R.id.textView16)
+
 
 
 
@@ -49,6 +56,8 @@ class VisualizerFragment : Fragment() {
         pb_2.progress = 41
         pb_3.progress = 86
         pb_4.progress = 17
+        pb_5.progress = 64
+        pb_6.progress = 82
 
 
         bottomNavigation.setOnNavigationItemSelectedListener(object :
@@ -74,11 +83,14 @@ class VisualizerFragment : Fragment() {
         })
 
         show_stats.setOnClickListener {
-            Toast.makeText(getContext(), "hi", LENGTH_SHORT).show()
             var a = Random.nextInt(0, 100)
             var b = Random.nextInt(0, 100)
             var c = Random.nextInt(0, 100)
             var d = Random.nextInt(0, 100)
+            var e = Random.nextInt(0, 100)
+            var f = Random.nextInt(0, 100)
+
+
             pb_1.progress = a
             num_text_1.setText(a.toString())
             pb_2.progress = b
@@ -87,6 +99,10 @@ class VisualizerFragment : Fragment() {
             num_text_3.setText(c.toString())
             pb_4.progress = d
             num_text_4.setText(d.toString())
+            pb_5.progress = e
+            num_text_5.setText(e.toString())
+            pb_6.progress = f
+            num_text_6.setText(f.toString())
         }
 
         return view
